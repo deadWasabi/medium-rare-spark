@@ -1,0 +1,15 @@
+package org.example;
+
+import org.apache.spark.sql.api.java.UDF2;
+
+import java.util.Collections;
+
+public class StringRepeaterUdf implements UDF2<String, Integer, String> {
+
+    // Poor generics support: https://github.com/janino-compiler/janino/issues/109
+
+    @Override
+    public Object call(Object str, Object times) {
+        return String.join("", Collections.nCopies((Integer) times, (String) str));
+    }
+}
